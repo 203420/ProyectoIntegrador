@@ -1,38 +1,622 @@
-.App {
-  text-align: center;
+html {
+  scroll-behavior: smooth;
+}
+body{
+    background-color: #f6f6f6;
+}
+header{
+    margin-bottom: 2em;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 1.5em;
+    width: 88%;
+}
+header h5{
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main{
+    margin: auto;
+    width: 88%;
+}
+.img{
+    background-image: url('./img/planta.jpg');
+    background-position: -0.4em -3.5em;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 105vh;
+    opacity: 0.9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#top{
+    background-color: transparent;
+    font-size: 1.3rem;
+    padding-top: 1.9em;
+    width: 15em;
+}
+#top h2{
+    font-size: 1.6em;
+    font-weight: 700;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#img2{
+    display: none;
+}
+#deatils{
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+}
+button{
+    background-color: #81bc92;
+    border: none;
+    border-radius: 0.4em;
+    color: #f6f6f6; 
+}
+button:hover{
+    background-color: #131313;
+}
+.main-button{
+    height: 3em;
+    margin-top: 1.5em;
+    margin-right: 0.25em;
+    padding: 0.5em 0.8em;
 }
 
-.App-link {
-  color: #61dafb;
+#reload{
+    width: 7%;
+    opacity: 0.6;
+    margin-bottom: -0.33em;
+}
+#reload:hover {
+    opacity: 1;
+}
+#bottom{
+    margin-top: calc(100vh - 16em);
+}
+#bottom2{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    margin-top: 2.5em;
+}
+#bottom3{
+    margin: auto;
+    width: 88%;
+}
+#slider img{
+    width: 100%;
+}
+.subtitle{
+    font-size: 1.05rem;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+.info{
+    width: 35%;
+    text-align: center;
+    margin-top: 1.25em;
+}
+.info h5{
+    font-weight: 600;
+}
+.data{
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.circle {
+    width: 1.6em;
+    height: 1.6em;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    box-shadow: 5px 10px 18px #8f8e8e;
+    background: #bebebe;
+    margin: 0;
+    opacity: 0.75;
+    position: absolute;
+    z-index: 2;
+}
+.infoHide{
+    background-color: #131313;
+    border-radius: 0.35em;
+    color: #f6f6f6;
+  
+    font-size: 0.8rem;
+    height: max-content;
+    width: 42%;
+
+    opacity: 0.8;
+    padding: 0.6em 0.8em;
+    position: absolute;
+    z-index: 3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+footer{
+    background-color: #eaeaea;
+    color: #404040;
+    font-size: 0.8rem;
+    height: 10em;
+    margin-top: 5em;
+    opacity: 0.9;
+    padding: 2em 1.6em;
+    position: relative;
+    text-align: center;
+}
+@media screen and (min-width: 461px){
+    header{
+        width: 80%;
+        font-size: 1.3rem;
+    }
+    main{
+        width: 80%;
+    }
+    #top{
+        padding-top: 2.25em;
+    }
+    #top h2{
+        font-size: 2.3rem;
+    }
+    .main-button{
+        height: 3.25em;
+        font-size: 1rem;
+    }
+    .img{
+        height: 99vh;
+        background-position: 0em -5em;
+    }
+    .subtitle{
+        padding-top: 1em;
+    }
+    #bottom{
+        margin-top: calc(100vh - 21em);
+    }
+    .info{
+        margin-top: 1.35em;
+        font-size: 1.2rem;
+    }
+}
+@media screen and (min-width: 621px){
+    header{
+        width: 76%;
+        font-size: 1.3rem;
+    }
+    main{
+        width: 76%;
+    }
+    #bottom3{
+        width: 76%;
+    }
+    #top{
+        padding-top: 2.3em;
+    }
+    #top h2{
+        font-size: 2.45rem;
+    }
+    .main-button{
+        height: 3.3em;
+        font-size: 1.1rem;
+    }
+    .img{
+        height: 99vh;
+        background-position: -1em -6em;
+    }
+    .subtitle{
+        padding-top: 1.5em;
+    }
+    .info{
+        margin-top: 1.4em;
+        font-size: 1.3rem;
+    }
+ 
+    
+}
+@media screen and (min-width: 750px){
+    .img{
+        background-image: none;
+        margin-bottom: 0;
+    }
+    #img2{
+        background-image: url('./img/planta.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: -0.3em -5em;
+        display: block;
+            
+        height: 26.5em;
+        opacity: 0.9;
+        position: absolute;
+
+        top: 5em;
+        right: 3.25em;
+
+        width: 17.5em;
+        z-index: -1;
+    }
+    #top{
+        margin-top: 4.65em;
+        height: calc(100vh - 7.9em);
+    }
+    #top h2{
+        font-size: 2.05em;
+    }
+    .main-button{
+        height: 3.3em;
+        font-size: 1.15rem;
+    }
+    #bottom{
+        margin-top: 0;
+        display: none;
+    }
+    .subtitle{
+        font-size: 1.15rem;
+    }
+    #bottom2{
+        margin-top: 2.5em;
+        display: block;
+        display: flex;
+        align-items:flex-start;
+        justify-content: space-evenly;
+
+        flex-wrap:nowrap;
+        width: 100%;
+        margin: auto;
+        margin-top: 2.5em;
+       
+    }
+    .info{
+        width: 32%;
+        margin-top: 1.35em;
+    }
+    #slider{
+        width: 58%;
+        margin-left: 12%;
+    }
+    #slider img{
+        height: 21.25em;
+    }
+    #infoSlider{
+        background-color: #81bc92;
+        color: #f6f6f6;
+        height: 21.25em;
+        width: 20%;
+        margin-right: 12%;
+        padding: 4em 1.5em;
+    }
+    #infoSlider h3{
+        font-weight: 600;
+    }
+    footer{
+        width: 100%;
+        margin-top: 6.5em;
+        position: relative;
+    }
+
+    
+    #c1{
+        bottom: 4.75em;
+        right: 2.25em;
+    }
+    #c2{
+        bottom: 8.5em;
+        left: 3.5em;
+    }
+    #c3{
+        bottom: 16em;
+        left: 7.5em;
+    }
+    #c4{
+        bottom: 24em;
+        right: 2.5em;
+    }
+    #info1{
+        bottom: 3.25em;
+        right: 3.25em;
+    }
+    #info2{
+        bottom: 9em;
+        left: -3.25em;
+    }
+    #info3{
+        bottom: 21.5em;
+        left: 1.75em;
+    }
+    #info4{
+        bottom: 36.5em;
+        left: 8.5em;
+    }
+
+    
+}
+@media screen and (min-width: 850px){
+    .circle {
+        width: 1.8em;
+        height: 1.8em;
+    }
+    #img2{
+        background-position: -0.3em -5.5em;
+            
+        height: 29.5em;
+        opacity: 0.9;
+
+        top: 5em;
+        right: 3.2em;
+
+        width: 20.5em;
+    }
+    #top{
+        margin-top: 4.75em;
+        height: calc(100vh - 8em);
+    }
+    #top h2{
+        font-size: 2.15em;
+    }
+    .main-button{
+        height: 3.3em;
+        font-size: 1.2rem;
+    }
+
+    #info2{
+        bottom: 10.5em;
+        left: -5em;
+    }
+    #info3{
+        left: 3.5em;
+        width: 35%;
+    }
+    #info4{
+        bottom: 38em;
+        left: 12em;
+    }
+
+}
+@media screen and (min-width: 975px){
+    #img2{
+        background-position: -0.5em -6.2em;
+            
+        height: 32.5em;
+        opacity: 0.9;
+
+        top: 3.5em;
+        right: 4em;
+
+        width: 23.5em;
+    }
+    #top{
+        margin-top: 4.75em;
+        height: calc(100vh - 8em);
+    }
+    #top h2{
+        font-size: 2.5em;
+    }
+    .main-button{
+        height: 3.3em;
+        font-size: 1.25rem;
+    }
+
+    header{
+        width: 70%;
+        font-size: 1.35rem;
+    }
+    main{
+        width: 70%;
+    }
+    #bottom3{
+        width: 70%;
+    }
+    #slider{
+        width: 55%;
+        margin-left: 15%;
+    }
+    #slider img{
+        height: 22.5em;
+    }
+    #infoSlider{
+        height: 22.5em;
+        width: 17%;
+        margin-right: 15%;
+    }
+
+    #c1{
+        bottom: 4em;
+        right: 2.25em;
+    }
+    #c2{
+        bottom: 9.35em;
+        left: 3.85em;
+    }
+    #c3{
+        bottom: 17.5em;
+        left: 7.8em;
+    }
+    #c4{
+        bottom: 28em;
+        right: 4em;
+    }
+
+    #info1{
+        bottom: 3.5em;
+        right: 3.5em;
+    }
+    #info2{
+        bottom: 12.15em;
+        left: -6.5em;
+    }
+    #info3{
+        bottom: 24em;
+        left: 6em;
+        width: 26%;
+    }
+    #info4{
+        bottom: 44.5em;
+        left: 12.5em;
+    }
+}
+@media screen and (min-width: 1120px){
+    #img2{
+        background-position: -0.75em -6.35em;
+            
+        height: 33em;
+        opacity: 0.9;
+
+        top: 3.2em;
+        right: 5.15em;
+
+        width: 24.5em;
+    }
+    #top{
+        margin-top: 4.75em;
+        height: calc(100vh - 8em);
+        width: 20em;
+    }
+    #top h2{
+        font-size: 2.6em;
+    }
+    .main-button{
+        height: 3.35em;
+        font-size: 1.25rem;
+    }
+    #slider img{
+        height: 23.5em;
+    }
+    #infoSlider{
+        height: 23.5em;
+        width: 17%;
+        margin-right: 15%;
+    }
+    .info{
+        width: 22%;
+        margin-top: 1.5em;
+    }
+    #c1{
+        bottom: 2.8em;
+        right:3em;
+    }
+    #info1{
+        bottom: 4em;
+        right: 8.25em;
+    }
+}
+@media screen and (min-width: 1285px){
+    #img2{
+        background-position: -0.75em -6.35em;
+            
+        height: 33em;
+        opacity: 0.9;
+
+        top: 3.2em;
+        right: 7.5em;
+
+        width: 24.5em;
+    }
+    header{
+        width: 66%;
+        font-size: 1.35rem;
+    }
+    main{
+        width: 66%;
+    }
+    #bottom3{
+        width: 66%;
+    }
+    #slider{
+        width: 53%;
+        margin-left: 17%;
+    }
+    #slider img{
+        height: 25.5em;
+    }
+    #infoSlider{
+        height: 25.5em;
+        width: 15%;
+        margin-right: 17%;
+    }
+    .subtitle{
+        font-size: 1.25rem;
+    }
+}
+@media screen and (min-width: 1400px){
+    .circle {
+        width: 2em;
+        height: 2em;
+    }
+    #img2{
+        background-position: -0.75em -6.5em;
+            
+        height: 33.75em;
+        opacity: 0.9;
+
+        top: 1.25em;
+        right: 8.85em;
+
+        width: 26em;
+    }
+    #top h2{
+        font-size: 2.75em;
+    }
+    .main-button{
+        height: 3.4em;
+        font-size: 1.3rem;
+    }
+    .subtitle{
+        font-size: 1.35rem;
+    }
+    .info{
+        width: 22%;
+        margin-top: 1.75em;
+    }
+    #slider img{
+        height: 28.5em;
+    }
+    #infoSlider{
+        height: 28.5em;
+    }
+
+    .infoHide{
+        font-size: 0.91rem;
+    }
+
+    #c1{
+        bottom: 1.75em;
+        right: 3em;
+    }
+    #c2{
+        bottom: 9.5em;
+        left: 4.5em;
+    }
+    #c3{
+        bottom: 16.5em;
+        left: 9em;
+    }
+    #c4{
+        bottom: 30em;
+        right: 5em;
+    }
+
+    #info1{
+        bottom: 2.5em;
+        right: 8.2em;
+        width: 45%;
+    }
+    #info2{
+        bottom: 11.5em;
+        left: -5.85em;
+        width: 32%;
+    }
+    #info3{
+        bottom: 22.5em;
+        left: 3em;
+    }
+    #info4{
+        bottom: 42em;
+        left: 11.25em;
+    }
 }

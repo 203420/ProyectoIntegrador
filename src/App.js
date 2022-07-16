@@ -72,7 +72,7 @@ class App extends Component {
 
   render() {
     return (
-      <body>
+      <body id='body'>
         <div className="img">
           <header>
             <nav>

@@ -3,9 +3,10 @@ import axios from "axios";
 import './App.css';
 
 import reload from './img/reload.png';
-import slider from './img/slider.jpg';
 import tempImg from './img/temp.jpg';
 import humImg from './img/hum.jpg';
+
+import Slider from './componentes/Slider';
 
 class App extends Component {
 
@@ -123,7 +124,7 @@ class App extends Component {
             </div>
             <div id="bottom2">
               <div id="slider">
-                <img src={slider} alt="error" />
+                <Slider></Slider>
               </div>
               <div id="infoSlider">
                 <h3 className="subtitle">Crecimiento de la planta</h3>
@@ -133,12 +134,10 @@ class App extends Component {
               <h3 className="subtitle">Reportes estadisticos</h3>
               <section className="data">
                   <div className='reporte' id='temp'>
-                  <img src={tempImg} alt="error"/>
-                    <section >Generar reporte de temperatura</section>
+                    <section className="textoReporte">Generar reporte de temperatura</section>
                   </div>
                   <div className='reporte' id='hum'>
-                  <img src={humImg} alt="error"/>
-                    <section>Generar reporte de humedad</section>
+                    <section className="textoReporte">Generar reporte de humedad</section>
                   </div>
               </section>
             </div>

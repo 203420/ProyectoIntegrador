@@ -16,9 +16,9 @@ class Main extends Component {
       humedad: [],
     }
     this.get = this.get(this)
-    this.getTemp = this.getTemp(this) 
-    this.getHum = this.getHum(this)
-    this.exportDocument = this.exportDocument(this)
+    //this.getTemp = this.getTemp(this) 
+    //this.getHum = this.getHum(this)
+    //this.exportDocument = this.exportDocument(this)
   }
 
   
@@ -31,6 +31,7 @@ class Main extends Component {
       },
     })
       .then(res => {
+        console.log(res.data[0])
         this.setState({ datos: res.data })
         window.location.reload();
       })
@@ -83,16 +84,21 @@ class Main extends Component {
       })
   }
 
-  exportDocument = (value) => {
-    let tamP, tamM, error = 0.05
+  calculos = (value) => {
+    let tamP, tamM, error = 0.05, z1 = 1.96, z2 = 1.645, r, k, a, UV, log, aux;
+    let datosOrden = []
     if (value === 1){
         tamP = this.state.temperatura.length;
+        datosOrden = this.state.temperatura;
     }
     if (value === 2){
         tamP = this.state.humedad.length;
+        datosOrden = this.state.humedad;
     }
+    datosOrden.sort();
       
   }
+
 
   render() {
     return (
@@ -114,13 +120,13 @@ class Main extends Component {
               </div>
               <div id="img2">
                 <div className="circle" id="c1"></div>
-                <div className="infoHide" id="info1">Nivel de agua: {this.state.datos.nivelA}</div>
+                <div className="infoHide" id="info1">Nivel de agua: {this.state.datos.nivelA}%</div>
                 <div className="circle" id="c2"></div>
-                <div className="infoHide" id="info2">Humedad del suelo: {this.state.datos.humedadS}</div>
+                <div className="infoHide" id="info2">Humedad del suelo: {this.state.datos.humedadS}%</div>
                 <div className="circle" id="c3"></div>
-                <div className="infoHide" id="info3">Temperatura: {this.state.datos.temperatura}</div>
+                <div className="infoHide" id="info3">Temperatura: {this.state.datos.temperatura}°C</div>
                 <div className="circle" id="c4"></div>
-                <div className="infoHide" id="info4">Humedad: {this.state.datos.humedad}</div>
+                <div className="infoHide" id="info4">Humedad: {this.state.datos.humedad}%</div>
               </div>
             </div>
           </main>
@@ -131,19 +137,19 @@ class Main extends Component {
               <section className="data">
                 <div className="info">
                   <h5>Nivel de agua</h5>
-                  <h2>{this.state.datos.nivelA}</h2>
+                  <h2>{this.state.datos.nivelA}%</h2>
                 </div>
                 <div className="info">
                   <h5>Humedad del suelo</h5>
-                  <h2>{this.state.datos.humedadS}</h2>
+                  <h2>{this.state.datos.humedadS}%</h2>
                 </div>
                 <div className="info">
                   <h5>Temperatura</h5>
-                  <h2>{this.state.datos.temperatura}</h2>
+                  <h2>{this.state.datos.temperatura}°C</h2>
                 </div>
                 <div className="info">
                   <h5>Humedad</h5>
-                  <h2>{this.state.datos.humedad}</h2>
+                  <h2>{this.state.datos.humedad}%</h2>
                 </div>
               </section>
             </div>
@@ -158,10 +164,10 @@ class Main extends Component {
             <div id="bottom3">
               <h3 className="subtitle">Reportes estadisticos</h3>
               <section className="data">
-                  <div className='reporte' id='temp' onClick={() => this.exportDocument(1)}>
+                  <div className='reporte' id='temp' onClick={() => this.calculos(1)}>
                     <section className="textoReporte">Generar reporte de temperatura</section>
                   </div>
-                  <div className='reporte' id='hum' onClick={() => this.exportDocument(2)}>
+                  <div className='reporte' id='hum' onClick={() => this.calculos(2)}>
                     <section className="textoReporte">Generar reporte de humedad</section>
                   </div>
               </section>

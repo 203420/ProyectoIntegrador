@@ -21,7 +21,8 @@ class Historial extends Component {
             },
         })
             .then(res => {
-                this.setState({ datos: res.data })
+                console.log(res.data)
+                this.setState({ listaDatos: res.data })
             })
             .catch(error => {
                 console.log(error.response);
@@ -50,6 +51,7 @@ class Historial extends Component {
                                         <th>Humedad Suelo</th>
                                         <th>Temperatura</th>
                                         <th>Humedad</th>
+                                        <th>Riego</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,6 +62,7 @@ class Historial extends Component {
                                             <td>{listaDatos.humedadS}</td>
                                             <td>{listaDatos.temperatura}</td>
                                             <td>{listaDatos.humedad}</td>
+                                            <td>{listaDatos.riego}</td>
                                         </tr>)
                                     }
                                 </tbody>

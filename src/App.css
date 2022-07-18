@@ -5,7 +5,6 @@ html {
 #body{
     background-color: #f6f6f6;
 }
-
 header{
     margin-bottom: 2em;
     margin-left: auto;
@@ -17,6 +16,26 @@ header{
 header h5{
     font-size: 1.2em;
     font-weight: 600;
+}
+#nav{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+#navText{
+    color: #131313;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+#navText:hover{
+    color: #81bc92;
+}
+.link{
+    color: #000000;
+    text-decoration: none;
+}
+.link:hover{
+    color: #81bc92;
 }
 main{
     margin: auto;
@@ -57,10 +76,12 @@ button{
 }
 button:hover{
     background-color: #131313;
+    
 }
 .main-button{
     height: 3em;
     border-radius: 0.4em;
+    box-shadow: 0 5px 20px 0 rgba(153, 153, 153, .25);
     margin-top: 1.5em;
     margin-right: 0.25em;
     padding: 0.5em 0.8em;
@@ -157,6 +178,127 @@ button:hover{
     padding: 0.6em 0.8em;
     position: absolute;
     z-index: 3;
+}
+
+
+.form-boxUser{
+    background-color: #f6f6f6;
+    height: max-content;
+    top: 8%;
+    text-align: center;
+    padding: 2em;
+    position: absolute;
+    width: 100%;
+}
+
+#title-user{
+    color: #81bc92;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1em;
+}
+
+.labelUser{
+    display: block;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-bottom: 0.5em;
+    margin-left: 10%;
+    text-align: left;
+}
+#user{
+    background: url('./img/user.png');
+    background-size: 2em;
+    background-position: 0.3em 0.45em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+#passw{
+    background: url('./img/password.png');
+    background-size: 2.25em;
+    background-position: 0.2em 0.3em;
+    background-repeat: no-repeat;
+    padding-left: 2.8em;
+}
+.inputUser{
+    border: 1px solid #909090;
+    border-radius: 0.3em;
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-bottom: 2.5em;
+    width: 80%;
+    height: 3em;
+    outline: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+.inputUser:focus{
+    border: 0.20em solid #81bc92;
+}
+
+.buttonUser {
+    border: none;
+    border-radius: 0.3em;
+    color: #f6f6f6;
+    cursor: pointer;
+    display: block;
+    font-size: 0.8rem;
+   
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.65em;
+
+    height: 3.5em;
+    width: 40%;
+    padding: 0.5em 0.5em;     
+}
+.buttonUser:hover{
+    background-color: #000000;
+}
+
+#selectUser{
+    width: 80%;
+    margin-bottom: 2.5em;
+}
+
+.tableData{
+    background-color: #f6f6f6;
+}
+
+
+table{
+    box-shadow: 0 5px 20px 0 rgba(153, 153, 153, .25);
+    border-radius: 0.45em;
+    border-collapse:collapse;
+    font-size: 0.75rem;
+    margin-top: 1em;
+    margin-bottom: 3em;
+
+    text-align: center;
+    
+    width:100%;
+    
+}
+
+thead tr th{
+    color:rgb(0, 0, 0);
+    font-weight: 500;
+    padding-top: 0.65em;
+    padding-bottom: 0.65em;
+}
+  
+th,td{
+    text-align:center;
+    padding:5px 0;
+}
+  
+tbody tr:nth-child(even){
+    background:#fafafa;
+  }
+  
+tbody tr:hover{
+    background:#81bc92;
+    color:#f6f6f6;
 }
 
 
@@ -338,9 +480,8 @@ footer h4{
         margin: auto;
         margin-top: 2.5em;  
     }
-
     .reporte{
-        background-color: none;
+        background-color: transparent;
         border-radius: 0.4em;
         padding: 0;
         overflow: hidden;
@@ -377,6 +518,10 @@ footer h4{
         opacity: 0.6;
     }
 
+    table{
+        font-size: 1rem;
+    }
+
     #c1{
         bottom: 4.75em;
         right: 2.25em;
@@ -408,6 +553,30 @@ footer h4{
     #info4{
         bottom: 36.5em;
         left: 8.5em;
+    }
+
+    #title-user{
+        font-size: 2.8em;
+    }
+    .inputUser{
+        font-size: 1.1em;
+    }
+    .buttonUser{
+        font-size: 1rem;
+    }
+    .labelUser{
+        font-size: 1rem;
+    }
+    .linkUS{
+        font-size: 1rem;
+    }
+    .form-boxUser{
+        background-color: #ffffff;
+        left: 30%;
+        right: 30%;
+        width: 40%;
+        border-radius: 0.7em;
+        box-shadow: 2px 2px 5px 2px #b6b6b6;
     }
 
     
@@ -627,10 +796,10 @@ footer h4{
     #img2{
         background-position: -0.75em -6.5em;
             
-        height: 33.75em;
+        height: 32.25em;
         opacity: 0.9;
 
-        top: 1.25em;
+        top: 1.8em;
         right: 8.85em;
 
         width: 26em;
@@ -661,24 +830,24 @@ footer h4{
     }
 
     #c1{
-        bottom: 1.75em;
+        bottom: 0.55em;
         right: 3em;
     }
     #c2{
-        bottom: 9.5em;
+        bottom: 8.5em;
         left: 4.5em;
     }
     #c3{
-        bottom: 16.5em;
+        bottom: 15em;
         left: 9em;
     }
     #c4{
-        bottom: 30em;
-        right: 5em;
+        bottom: 26.5em;
+        right: 4.5em;
     }
 
     #info1{
-        bottom: 2.5em;
+        bottom: 1em;
         right: 8.2em;
         width: 45%;
     }
@@ -688,11 +857,11 @@ footer h4{
         width: 32%;
     }
     #info3{
-        bottom: 22.5em;
+        bottom: 20.5em;
         left: 3em;
     }
     #info4{
-        bottom: 42em;
+        bottom: 37.75em;
         left: 11.25em;
     }
 }

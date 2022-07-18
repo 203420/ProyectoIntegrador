@@ -5,6 +5,7 @@ import '../App.css';
 
 import reload from '../img/reload.png';
 import Slider from './Slider';
+import Reporte from './Reporte';
 
 class Main extends Component {
 
@@ -85,7 +86,7 @@ class Main extends Component {
   }
 
   calculos = (value) => {
-    let tamP, tamM, error = 0.05, z1 = 1.96, z2 = 1.645, r, k, a, UV, log, aux;
+    let tamP, tamM, error = 0.05, z1 = 1.96, z2 = 1.645, r, k, a, UV = 1, log, aux;
     let datosOrden = []
     if (value === 1){
         tamP = this.state.temperatura.length;
@@ -96,7 +97,22 @@ class Main extends Component {
         datosOrden = this.state.humedad;
     }
     datosOrden.sort();
+
+    r = datosOrden[datosOrden.length-1] - datosOrden [0];
+    log = 1+3.332 * Math.log10(tamP);
+    k = Math.round(log)
+    a = r/k;
+    if (a % 1 === 0){
+      a = a+1
+    }else{
+      aux = Math.round(a);
+      if(aux < a){
+        a = aux + 1;
+      }else { a = aux }
+    }
       
+    let clases = [], limI = [], limS = [], limIE = [], limSE = [], 
+    MC= [], frec = [], frecAC =[], frecCMP = []
   }
 
 
@@ -164,12 +180,14 @@ class Main extends Component {
             <div id="bottom3">
               <h3 className="subtitle">Reportes estadisticos</h3>
               <section className="data">
+               
                   <div className='reporte' id='temp' onClick={() => this.calculos(1)}>
                     <section className="textoReporte">Generar reporte de temperatura</section>
                   </div>
                   <div className='reporte' id='hum' onClick={() => this.calculos(2)}>
                     <section className="textoReporte">Generar reporte de humedad</section>
                   </div>
+            
               </section>
             </div>
           </section>

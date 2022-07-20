@@ -13,11 +13,15 @@ class Reporte extends Component {
             temperatura: [],
             humedad: [],
             tablaData: [],
-            media: 0,
+            mediaT: 0,
+            mediaH:0,
             desEst: 0,
             tamMuestra: 0,
             medMuestra: 0,
             datosMuestra: [],
+            z: 0,
+            conclusion: 0,
+            opcion: 0,
         }
         this.getTemp = this.getTemp.bind(this);
         this.getHum = this.getHum.bind(this);
@@ -67,18 +71,18 @@ class Reporte extends Component {
     }
 
     calculos = (value) => {
-        let tamP = 0, tamM, error, z1 = 1.96, z2 = 1.645, r, k, a, UV = 0.1, log, aux, nClas;
+        let tamP = 0, tamM, error, z1 = 1.96, r, k, a, UV = 0.1, log, nClas;
         let datosOrden = [];
 
         if (value === 1) {
             tamP = this.state.temperatura.length;
-            for (let i = tamP - 1; i >= 0; i--) {
+            for (let i = tamP - 1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.temperatura[i]["temperatura"]));
             }
         }
         if (value === 2) {
             tamP = this.state.humedad.length;
-            for (let i = tamP -1; i >= 0; i--) {
+            for (let i = tamP -1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.humedad[i]["humedadS"]));
             }
         }
@@ -103,7 +107,7 @@ class Reporte extends Component {
         a = a + 0.1;
         
         let clases = [], limI = [], limS = [], limIE = [], limSE = [], MC = [], frec = [], frecAC = [], frecCMP = [];
-        let mcFrec = 0, frecA = 0, acum = 0, limIStr, limIEStr, limSEStr, MCStr;
+        let mcFrec = 0, frecA = 0, acum = 0, limIStr, limSStr, limIEStr, limSEStr, MCStr;
 
         limI[0] = datosOrden[0];
         for (let i = 0; i < nClas; i++) {
@@ -111,6 +115,8 @@ class Reporte extends Component {
 
             clases[i] = i + 1;
             limS[i] = limI[i] + (a - UV);
+            limSStr = limS[i].toFixed(1);
+            limS[i] = parseFloat(limSStr);
 
 
             limIE[i] = limI[i] - (UV / 2);
@@ -146,12 +152,17 @@ class Reporte extends Component {
             }
         }
 
-        let medStr, media = acum / tamP;
+        let medStr, media = 0;
+        media = acum / tamP;
         medStr = media.toFixed(2);
         media = parseFloat(medStr); 
 
         if (isNaN(media) === false){
-            this.setState ({media : media});
+            if (value === 1) {
+                this.setState ({mediaT : media});
+            }if (value === 2) {
+                this.setState ({mediaH : media});
+            }
         }
 
         let empty = [];
@@ -173,7 +184,12 @@ class Reporte extends Component {
 
             this.state.tablaData.push(arrayDatos);
 
-            data1 = (MC[i] - this.state.media);
+            if (value === 1) {
+                data1 = (MC[i] - this.state.mediaT);
+            }if (value === 2) {
+                data1 = (MC[i] - this.state.mediaH);
+            }
+
             data2 = Math.pow(data1, 2);
             dataVar = dataVar + ( data2 * frec[i]);
         }
@@ -183,13 +199,14 @@ class Reporte extends Component {
         let desEStr = desE.toFixed(2);
         desE = parseFloat(desEStr);
 
+        this.state.desEst = 0;
         this.state.desEst = desE;
     
         console.log(this.state.tablaData);
 
-        let z3 = Math.pow(z1, 2);
+        let z2 = Math.pow(z1, 2);
         error = Math.pow(0.05, 2);
-        tamM = ( z3 * 0.5 * 0.5 * tamP)/ ((error * (tamP-1)+ z3 * 0.5 *0.5));
+        tamM = ( z2 * 0.5 * 0.5 * tamP)/ ((error * (tamP-1)+ z2 * 0.5 *0.5));
         tamM = Math.round(tamM);
 
         this.setState ({ tamMuestra: tamM});
@@ -201,7 +218,9 @@ class Reporte extends Component {
         
         console.log(cant);
 
-        for (let i = tamP-1; i >= 0; i = i-cant) {
+        let empty2 = []
+        this.setState ( {datosMuestra: empty2})
+        for (let i = tamP-1; i >= tamP-200; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
             if (value === 1) {
                 this.state.datosMuestra.push(parseFloat(this.state.temperatura[i]["temperatura"]))
             }if (value === 2) {
@@ -209,19 +228,81 @@ class Reporte extends Component {
             }
         }
         let sum = this.state.datosMuestra.reduce((previous, current) => current += previous);
-        let medM = sum/this.state.datosMuestra.length;
+        let medM = 0;
+        medM = sum/this.state.datosMuestra.length;
+        let medMStr = medM.toFixed(2);
+        medM = parseFloat(medMStr);
         this.setState ({medMuestra : medM});
 
-
-        if(this.state.temperatura.length !== 0 || this.state.humedad.length !==0){
-            this.generarPDF();
-        }else{
-            alert("Error al generar reporte, intente nuevamente")
-        }
+        this.setState ({ opcion: value})
+        let zc = 0, conclusion = 0;
         
+        if (value === 1){
+            zc = ((this.state.medMuestra - this.state.mediaT)/(this.state.desEst/Math.sqrt(tamP)));
+            if (zc < -1.96 || zc > 1.96){
+                conclusion = 1
+            }else {
+                conclusion = 2
+            }
+            
+            this.setState ( {conclusion : conclusion})
+            this.state.z = zc;
+
+            if(this.state.mediaT !==0){
+                this.generarPDF();
+            }else{
+                alert("Error al generar reporte, intente nuevamente")
+            }
+
+        }if (value === 2){
+            zc = ((this.state.medMuestra - this.state.mediaH)/(this.state.desEst/Math.sqrt(tamP)));
+            if (zc < -1.96 || zc > 1.96){
+                conclusion = 1
+            }else {
+                conclusion = 2
+            }
+        
+            this.setState ( {conclusion : conclusion})
+            this.state.z = zc;
+
+            if(this.state.mediaH !==0){
+                this.generarPDF();
+            }else{
+                alert("Error al generar reporte, intente nuevamente")
+            }
+        }
+ 
     }
 
     generarPDF () {
+        let mediaString, nombreReporte, tipoData, tipoValor, valorZ, acpt, conclusion, hipA, hipN, concP;
+        valorZ = this.state.z.toFixed(2);
+        if (this.state.opcion === 1){
+            mediaString = this.state.mediaT.toString();
+            nombreReporte = "Reporte Temperatura";
+            tipoData = "temperatura"
+            tipoValor = "°C"
+        }if (this.state.opcion === 2){
+            mediaString = this.state.mediaH.toString();
+            nombreReporte = "Reporte Humedad";
+            tipoData = "humedad"
+            tipoValor = "%"
+        }
+
+        hipN = "La planta se encuentra en un ambiente con una "+ tipoData +" de "+ mediaString+" "+ tipoValor+" en promedio"
+        hipA = "La planta se encuentra en un ambiente con una "+ tipoData +" diferente de "+ mediaString+" "+ tipoValor+" en promedio"
+
+        if(this.state.conclusion === 1){
+            acpt = "se encuentra en la zona de rechazo"
+            conclusion = "existe evidencia suficiente para rechazar la hipotesis nula y aceptar la alternativa."
+            concP = hipA;
+        } if(this.state.conclusion === 2){
+            acpt = "se encuentra en la zona de aceptación"
+            conclusion = "existe evidencia suficiente para aceptar la hipotesis nula."
+            concP = hipN;
+        }
+        
+
         var columnas = [["Clase", "L. Inferior", "L.Superior", "L.Inf Exacto", "L.Sup Exacto","Marca Clase", "Frec", "Frec. Ac", "Frec. CMP"]];
         let content = {
             startY: 25,
@@ -233,14 +314,26 @@ class Reporte extends Component {
         };
         const doc = new jsPDF();
 
-        doc.setFontSize(12);
-        doc.text("Ultimas 200 mediciones", 15, 18);
+        doc.setFontSize(11);
+        doc.text(nombreReporte+" [ultimas 200 mediciones]", 15, 18);
         doc.autoTable(content);
-        doc.text("Media de los datos: "+ this.state.media.toString(), 15, 90);
-        doc.text("Desviación estandar: "+ this.state.desEst.toString(), 15, 100);
-        doc.text("Tamaño de muestra calculado: "+ this.state.tamMuestra.toString(), 15, 110);
-        doc.text("Media de la muestra: "+ this.state.medMuestra.toString(), 15, 120);
-        doc.save("Reporte.pdf");
+        doc.text("Media de los datos: "+ mediaString, 15, 100);
+        doc.text("Desviación estandar: "+ this.state.desEst.toString(), 15, 108);
+        doc.text("Tamaño de muestra calculado: "+ this.state.tamMuestra.toString(), 15, 116);
+        doc.text("Media de la muestra: "+ this.state.medMuestra.toString(), 15, 124);
+        doc.text("Hipótesis Nula: "+ hipN, 15, 134);
+        doc.text("Hipótesis Alternativa: "+hipA , 15, 140);
+        doc.text("H0: M = "+mediaString, 15, 146);
+        doc.text("H1: M != "+mediaString, 15, 152);
+        doc.text("Nivel de significancia = 5% = 0.05", 15, 158);
+        doc.text("Nivel de confianza = 95% = 0.95", 15, 164);
+        doc.text("Nivel de confianza de la prueba de hipótesis = 0.5 - 0.025 = 0.475 --> +-1.96", 15, 170);
+        doc.text("Transformando la media en un valor Z se obtuvo: "+valorZ , 15, 176);
+        doc.text("Conclusión: El valor de Zc es de "+valorZ+" por lo que "+acpt+". Esto permite" , 15, 186);
+        doc.text("llegar a la conclusión de que tras realizar un analisis estadistico con un 95% de confianza" , 15, 191);
+        doc.text(conclusion , 15, 196);
+        doc.text("Conclusión práctica: "+concP , 15, 204);
+        doc.save(nombreReporte+".pdf");
     }
 
     render() {

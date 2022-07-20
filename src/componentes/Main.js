@@ -58,7 +58,7 @@ class Main extends Component {
         <div className="img">
           <header>
             <nav id='nav'>
-              <div><NavLink className="link" to="/datos"><h5>(logo) Softness</h5></NavLink></div>
+              <div><NavLink className="link" to="/datos"><h5>Softness</h5></NavLink></div>
               <div id='navText'><NavLink className="link" to="/historial">Historial</NavLink></div>
             </nav>
           </header>

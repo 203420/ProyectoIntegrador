@@ -1,4 +1,4 @@
-import { BrowserRouter , Routes, Router, Route } from "react-router-dom";
+import { BrowserRouter , Routes, Route } from "react-router-dom";
 import Login from './componentes/Login'
 import Main from './componentes/Main'
 import Historial from './componentes/Historial'

@@ -47,10 +47,10 @@ class Historial extends Component {
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
-                                        <th>Nivel agua</th>
-                                        <th>Humedad Suelo</th>
-                                        <th>Temperatura</th>
-                                        <th>Humedad</th>
+                                        <th>Nivel agua%</th>
+                                        <th>Humedad Suelo%</th>
+                                        <th>Temperatura°C</th>
+                                        <th>Humedad%</th>
                                         <th>Riego</th>
                                     </tr>
                                 </thead>

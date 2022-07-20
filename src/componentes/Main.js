@@ -20,7 +20,6 @@ class Main extends Component {
   }
 
   
-
   get() {
     axios.get("http://localhost:8000/django/datos/actual", {
       headers: {
@@ -29,7 +28,21 @@ class Main extends Component {
       },
     })
       .then(res => {
-        console.log(res.data[0])
+        this.setState({ datos: res.data })
+      })
+      .catch(error => {
+        console.log(error.response);
+      })
+  }
+
+  getReload = () => {
+    axios.get("http://localhost:8000/django/datos/actual", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + localStorage.getItem('token'),
+      },
+    })
+      .then(res => {
         this.setState({ datos: res.data })
         window.location.reload();
       })
@@ -55,7 +68,7 @@ class Main extends Component {
               <h2>Monitoreo de Lechuga</h2>
               <div id="details">
                 <a href="#info-plant"><button className="main-button">Ver datos de la planta</button></a>
-                <img src={reload} alt="error" id="reload" onClick={this.get}/>
+                <img src={reload} alt="error" id="reload" onClick={() => this.getReload()}/>
               </div>
               <div id="img2">
                 <div className="circle" id="c1"></div>
@@ -101,7 +114,7 @@ class Main extends Component {
               </div>
             </div>
             <div id="bottom3">
-              <Reporte></Reporte>
+             <Reporte></Reporte>
             </div>
           </section>
 

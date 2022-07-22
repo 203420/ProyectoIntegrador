@@ -76,13 +76,13 @@ class Reporte extends Component {
 
         if (value === 1) {
             tamP = this.state.temperatura.length;
-            for (let i = tamP - 1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP - 1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.temperatura[i]["temperatura"]));
             }
         }
         if (value === 2) {
             tamP = this.state.humedad.length;
-            for (let i = tamP -1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP -1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.humedad[i]["humedadS"]));
             }
         }
@@ -220,7 +220,7 @@ class Reporte extends Component {
 
         let empty2 = []
         this.setState ( {datosMuestra: empty2})
-        for (let i = tamP-1; i >= 0; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
+        for (let i = tamP-1; i >= tamP-200; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
             if (value === 1) {
                 this.state.datosMuestra.push(parseFloat(this.state.temperatura[i]["temperatura"]))
             }if (value === 2) {

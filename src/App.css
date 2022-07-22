@@ -265,6 +265,11 @@ button:hover{
     background-color: #f6f6f6;
 }
 
+.tableData{
+    max-height: 35em;
+    margin-bottom: 1em;
+    overflow-y: scroll;
+}
 
 table{
     box-shadow: 0 5px 20px 0 rgba(153, 153, 153, .25);

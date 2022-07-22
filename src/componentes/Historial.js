@@ -68,7 +68,7 @@ class Historial extends Component {
                                 </tbody>
                             </table>
                         </div>
-                        <p>*Datos se actualizan cada: 5 minutos?</p>
+                        <p>*Datos se actualizan cada: 5 segundos</p>
                     </main>
 
                 </div>

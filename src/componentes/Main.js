@@ -65,7 +65,7 @@ class Main extends Component {
 
           <main>
             <div id="top">
-              <h2>Monitoreo de Lechuga</h2>
+              <h2>Monitoreo de Planta</h2>
               <div id="details">
                 <a href="#info-plant"><button className="main-button">Ver datos de la planta</button></a>
                 <img src={reload} alt="error" id="reload" onClick={() => this.getReload()}/>

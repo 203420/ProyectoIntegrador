@@ -76,13 +76,13 @@ class Reporte extends Component {
 
         if (value === 1) {
             tamP = this.state.temperatura.length;
-            for (let i = tamP - 1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP - 1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.temperatura[i]["temperatura"]));
             }
         }
         if (value === 2) {
             tamP = this.state.humedad.length;
-            for (let i = tamP -1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP -1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.humedad[i]["humedadS"]));
             }
         }
@@ -220,7 +220,7 @@ class Reporte extends Component {
 
         let empty2 = []
         this.setState ( {datosMuestra: empty2})
-        for (let i = tamP-1; i >= tamP-200; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
+        for (let i = tamP-1; i >= 0; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
             if (value === 1) {
                 this.state.datosMuestra.push(parseFloat(this.state.temperatura[i]["temperatura"]))
             }if (value === 2) {
@@ -333,6 +333,22 @@ class Reporte extends Component {
         doc.text("llegar a la conclusión de que tras realizar un analisis estadistico con un 95% de confianza" , 15, 191);
         doc.text(conclusion , 15, 196);
         doc.text("Conclusión práctica: "+concP , 15, 204);
+
+        doc.addPage("a4","portrait");
+        doc.text(nombreReporte+"- Gráfica frecuencia clases", 15, 18);
+
+        let x = 15, y;
+        for (let i = 0; i < this.state.tablaData.length; i++) {
+            y= 160;
+            for (let j = 0; j < this.state.tablaData[i][6]; j++) {
+                doc.text("*********", x, y)
+                y= y-3;
+            } 
+            x= x+20;
+            doc.text(this.state.tablaData[i][6].toString(), x-15, 165);
+            doc.text("Clase: "+this.state.tablaData[i][0].toString(), x-22, 170);
+        }
+        
         doc.save(nombreReporte+".pdf");
     }
 

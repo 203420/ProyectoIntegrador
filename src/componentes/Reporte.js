@@ -62,7 +62,7 @@ class Reporte extends Component {
         })
             .then(res => {
                 this.setState({ humedad: res.data });
-                console.log(this.state.temperatura);
+                console.log(this.state.humedad);
                 setTimeout(() => { this.calculos(value); }, 100);
             })
             .catch(error => {
@@ -76,13 +76,13 @@ class Reporte extends Component {
 
         if (value === 1) {
             tamP = this.state.temperatura.length;
-            for (let i = tamP - 1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP - 1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.temperatura[i]["temperatura"]));
             }
         }
         if (value === 2) {
             tamP = this.state.humedad.length;
-            for (let i = tamP -1; i >= tamP-200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP -1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.humedad[i]["humedadS"]));
             }
         }
@@ -220,7 +220,7 @@ class Reporte extends Component {
 
         let empty2 = []
         this.setState ( {datosMuestra: empty2})
-        for (let i = tamP-1; i >= tamP-200; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
+        for (let i = tamP-1; i >= 0; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
             if (value === 1) {
                 this.state.datosMuestra.push(parseFloat(this.state.temperatura[i]["temperatura"]))
             }if (value === 2) {
@@ -273,6 +273,7 @@ class Reporte extends Component {
         }
  
     }
+
 
     generarPDF () {
         let mediaString, nombreReporte, tipoData, tipoValor, valorZ, acpt, conclusion, hipA, hipN, concP;
@@ -334,10 +335,14 @@ class Reporte extends Component {
         doc.text(conclusion , 15, 196);
         doc.text("Conclusión práctica: "+concP , 15, 204);
 
+        let img = new Image();
+        img.src = require('../img/graf.png')
+        doc.addImage(img, "PNG", 30, 215, 140, 70);
+
         doc.addPage("a4","portrait");
         doc.text(nombreReporte+"- Gráfica frecuencia clases", 15, 18);
 
-        let x = 15, y;
+        let x = 15, y=40;
         for (let i = 0; i < this.state.tablaData.length; i++) {
             y= 160;
             for (let j = 0; j < this.state.tablaData[i][6]; j++) {
@@ -350,7 +355,9 @@ class Reporte extends Component {
         }
         
         doc.save(nombreReporte+".pdf");
+        
     }
+
 
     render() {
         return (

@@ -29,6 +29,13 @@ class Historial extends Component {
             })
     }
 
+    splitText(f) {
+        let fecha = f
+        let x = fecha.split(".");
+        let result = x[0].replace("T", " ");
+        return (result)
+    }
+
     render() {
         return (
             <body id='body'>
@@ -57,7 +64,7 @@ class Historial extends Component {
                                 <tbody>
                                     {
                                         this.state.listaDatos.map(listaDatos => <tr className="info-table" key={listaDatos.id}>
-                                            <td>{listaDatos.fecha}</td>
+                                            <td>{this.splitText(listaDatos.fecha)}</td>
                                             <td>{listaDatos.nivelA}</td>
                                             <td>{listaDatos.humedadS}</td>
                                             <td>{listaDatos.temperatura}</td>

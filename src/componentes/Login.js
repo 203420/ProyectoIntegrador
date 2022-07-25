@@ -5,37 +5,29 @@ import '../App.css';
 function Login () {
     let navigate = useNavigate();
 
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    };
-
     const login = () => {
-        var postData = {
+        const request_options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        var post_data = {
             username: document.getElementById('user').value,
             password: document.getElementById('passw').value
         }
 
         axios
-            .post("http://192.168.198.18/neotech/login", postData, requestOptions)
+            .post("http://192.168.198.18/neotech/login", post_data, request_options)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
-                localStorage.setItem('user_id', response.data.user_id);
-                navigate('/datos',{replace:true});
+                navigate('/menu', { replace: true });
             })
             .catch((error) => {
-                console.log(error.response.data)
-                if (error.response.data.username || error.response.data.password) {
-                    alert("No puedes dejar campos vacios");
-                }
-                if (error.response.data.non_field_errors) {
-                    alert("No puedes iniciar sesión con las credenciales proporcionadas")
-                }
+                alert("Verifique los datos de ingreso")
             });
-    };
-
+    }
     return (
         <body>
             <div className="form-boxUser">

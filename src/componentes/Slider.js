@@ -8,8 +8,9 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import foto1 from '../img/hum.jpg';
-import foto2 from '../img/temp.jpg';
+import foto1 from '../img/planta1.jpeg';
+import foto2 from '../img/planta2.jpeg';
+import foto3 from '../img/planta3.jpeg';
 
 const items = [
   {
@@ -17,6 +18,9 @@ const items = [
   },
   {
     src: foto2,
+  },
+  {
+    src: foto3,
   },
 ];
 

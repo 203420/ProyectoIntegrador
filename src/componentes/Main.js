@@ -110,7 +110,7 @@ class Main extends Component {
                 <Slider></Slider>
               </div>
               <div id="infoSlider">
-                <h3 className="subtitle">Crecimiento de la planta</h3>
+                <h3 className="subtitle">Imagenes de la planta</h3>
               </div>
             </div>
             <div id="bottom3">

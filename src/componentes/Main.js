@@ -21,7 +21,7 @@ class Main extends Component {
 
   
   get() {
-    axios.get("http://localhost:8000/django/datos/actual", {
+    axios.get("http://192.168.198.18/neotech/datos/actual", {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -36,7 +36,7 @@ class Main extends Component {
   }
 
   getReload = () => {
-    axios.get("http://localhost:8000/django/datos/actual", {
+    axios.get("http://192.168.198.18/neotech/datos/actual", {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage.getItem('token'),

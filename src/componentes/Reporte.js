@@ -37,7 +37,7 @@ class Reporte extends Component {
     }
 
     getTemp = (value) => {
-        axios.get("http://localhost:8000/django/datos/temperatura", {
+        axios.get("http://192.168.198.18/neotech/datos/temperatura", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -54,7 +54,7 @@ class Reporte extends Component {
     }
 
     getHum = (value) => {
-        axios.get("http://localhost:8000/django/datos/humedad", {
+        axios.get("http://192.168.198.18/neotech/datos/humedad", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + localStorage.getItem('token'),

@@ -19,7 +19,7 @@ function Login () {
         }
 
         axios
-            .post("http://localhost:8000/django/login", postData, requestOptions)
+            .post("http://192.168.198.18/neotech/login", postData, requestOptions)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user_id', response.data.user_id);

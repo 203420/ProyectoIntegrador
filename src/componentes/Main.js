@@ -8,7 +8,7 @@ import Slider from './Slider';
 import Reporte from './Reporte';
 
 class Main extends Component {
-
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -36,7 +36,7 @@ class Main extends Component {
   }
 
   getReload = () => {
-    axios.get("http://192.168.198.18/neotech/datos/actual", {
+    axios.get("https://192.168.100.79/django/datos/actual", {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage.getItem('token'),

@@ -22,7 +22,7 @@ function Login () {
             .post("https://192.168.100.79/django/login", post_data, request_options)
             .then(response => {
                 localStorage.setItem('token', response.data.token);
-                navigate('/menu', { replace: true });
+                navigate('/datos', { replace: true });
             })
             .catch((error) => {
                 alert("Verifique los datos de ingreso")

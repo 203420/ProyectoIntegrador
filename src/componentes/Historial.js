@@ -14,7 +14,7 @@ class Historial extends Component {
     }
 
     get() {
-        axios.get("http://192.168.198.18/neotech/datos/lista", {
+        axios.get("https://192.168.100.79/django/datos/lista", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + localStorage.getItem('token'),

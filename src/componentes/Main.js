@@ -21,7 +21,7 @@ class Main extends Component {
 
   
   get() {
-    axios.get("http://192.168.198.18/neotech/datos/actual", {
+    axios.get("https://192.168.100.79/django/datos/actual", {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage.getItem('token'),

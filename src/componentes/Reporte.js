@@ -37,7 +37,7 @@ class Reporte extends Component {
     }
 
     getTemp = (value) => {
-        axios.get("https://192.168.100.79/django/datos/temperatura", {
+        axios.get("https://192.168.97.49/django/datos/temperatura", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -54,7 +54,7 @@ class Reporte extends Component {
     }
 
     getHum = (value) => {
-        axios.get("https://192.168.100.79/django/datos/humedad", {
+        axios.get("https://192.168.97.49/django/datos/humedad2", {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -76,20 +76,20 @@ class Reporte extends Component {
 
         if (value === 1) {
             tamP = this.state.temperatura.length;
-            for (let i = tamP - 1; i >= 0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+            for (let i = tamP - 1; i >= tamP -200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
                 datosOrden.push(parseFloat(this.state.temperatura[i]["temperatura"]));
             }
         }
         if (value === 2) {
             tamP = this.state.humedad.length;
-            for (let i = tamP -1; i >=  0; i--) {         //Para pruebas, cambiar el i >= tamP - 200
-                datosOrden.push(parseFloat(this.state.humedad[i]["humedadS"]));
+            for (let i = tamP -1; i >=  tamP -200; i--) {         //Para pruebas, cambiar el i >= tamP - 200
+                datosOrden.push(parseFloat(this.state.humedad[i]["humedad"]));
             }
         }
 
         datosOrden.sort();
         console.log(datosOrden)
-
+        tamP = datosOrden.length;
 
         r = datosOrden[datosOrden.length - 1] - datosOrden[0];
         log = 1 + 3.332 * Math.log10(tamP);
@@ -217,22 +217,40 @@ class Reporte extends Component {
         cant = parseFloat(cantStr);
         
         console.log(cant);
+        console.log(tamP);
+        let maxMuestra = Math.round((tamP/cant));
+        console.log(maxMuestra)
 
         let empty2 = []
         this.setState ( {datosMuestra: empty2})
-        for (let i = tamP-1; i >= 0; i = i-cant) {            //Para pruebas, cambiar el i >= tamP - 200
+       
+        let valueM = 0
+        for (let indx =  tamP - 1; indx >= tamP - maxMuestra; indx--) {
+            let a = parseFloat("1")
             if (value === 1) {
-                this.state.datosMuestra.push(parseFloat(this.state.temperatura[i]["temperatura"]))
+                valueM = parseFloat(this.state.temperatura[indx]["temperatura"])
+                if (isNaN(valueM) === false){
+                    this.state.datosMuestra.push(valueM)
+                }
+                
             }if (value === 2) {
-                this.state.datosMuestra.push(parseFloat(this.state.humedad[i]["humedadS"]))
+                valueM = parseFloat(this.state.humedad[indx]["humedad"])
+                if (isNaN(valueM) === false){
+                    this.state.datosMuestra.push(valueM)
+                }
+                
             }
         }
+
+        console.log(this.state.datosMuestra);
+
         let sum = this.state.datosMuestra.reduce((previous, current) => current += previous);
         let medM = 0;
         medM = sum/this.state.datosMuestra.length;
         let medMStr = medM.toFixed(2);
         medM = parseFloat(medMStr);
-        this.setState ({medMuestra : medM});
+        //this.setState ({medMuestra : medM});
+        this.state.medMuestra = medM;
 
         this.setState ({ opcion: value})
         let zc = 0, conclusion = 0;
@@ -342,16 +360,16 @@ class Reporte extends Component {
         doc.addPage("a4","portrait");
         doc.text(nombreReporte+"- Gráfica frecuencia clases", 15, 18);
 
-        let x = 15, y=40;
+        let x = 15, y;
         for (let i = 0; i < this.state.tablaData.length; i++) {
-            y= 160;
+            y= 250;
             for (let j = 0; j < this.state.tablaData[i][6]; j++) {
                 doc.text("*********", x, y)
-                y= y-3;
+                y= y-2;
             } 
             x= x+20;
-            doc.text(this.state.tablaData[i][6].toString(), x-15, 165);
-            doc.text("Clase: "+this.state.tablaData[i][0].toString(), x-22, 170);
+            doc.text(this.state.tablaData[i][6].toString(), x-15, 255);
+            doc.text("Clase: "+this.state.tablaData[i][0].toString(), x-22, 260);
         }
         
         doc.save(nombreReporte+".pdf");

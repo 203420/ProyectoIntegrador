@@ -21,7 +21,7 @@ class Main extends Component {
 
   
   get() {
-    axios.get("https://192.168.100.79/django/datos/actual", {
+    axios.get("https://192.168.97.49/django/datos/actual", {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -36,7 +36,7 @@ class Main extends Component {
   }
 
   getReload = () => {
-    axios.get("https://192.168.100.79/django/datos/actual", {
+    axios.get("https://192.168.97.49/django/datos/actual", {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -72,9 +72,9 @@ class Main extends Component {
               </div>
               <div id="img2">
                 <div className="circle" id="c1"></div>
-                <div className="infoHide" id="info1">Nivel de agua: {this.state.datos.nivelA}%</div>
+                <div className="infoHide" id="info1">Nivel de agua: {this.state.datos.nivelA}</div>
                 <div className="circle" id="c2"></div>
-                <div className="infoHide" id="info2">Humedad del suelo: {this.state.datos.humedadS}%</div>
+                <div className="infoHide" id="info2">Humedad del suelo: {this.state.datos.humedadS}</div>
                 <div className="circle" id="c3"></div>
                 <div className="infoHide" id="info3">Temperatura: {this.state.datos.temperatura}°C</div>
                 <div className="circle" id="c4"></div>
